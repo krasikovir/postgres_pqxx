@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "yashkadb"
+      POSTGRES_USER: "alex"
+      POSTGRES_PASSWORD: "Cc327020"
+    command:
+      - "postgres"
+      - "-c"
+      - "port=2345"
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    ports:
+      - "2345:2345"
+  server:
+    image: alexxlalex/yashka:latest
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - /Users/krasikovir/CLionProjects/asioserver:/app
+    entrypoint: ["usr/bin/bash", "app/run_server.sh"]
