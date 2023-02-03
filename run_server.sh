@@ -1,9 +1,10 @@
 #! usr/bin/bash
 
-sleep 60000s
 cd app/
-mkdir build
+mkdir -p build
 cd build
 cmake ..
 cmake --build .
-./asioserver
+hostname -i > temp.txt
+hostname -i >> temp.txt
+cat temp.txt | ./asioserver

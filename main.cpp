@@ -143,7 +143,9 @@ int main()
 {
     try
     {
-        auto const address = net::ip::make_address("127.0.0.1");
+        std::string hostname;
+        std::cin >> hostname;
+        auto const address = net::ip::make_address(hostname);
         auto port = static_cast<unsigned short>(8080);
 
         net::io_context ioc{1};
